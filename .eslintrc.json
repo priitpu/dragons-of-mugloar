@@ -7,7 +7,8 @@
     "rules": {
         "comma-dangle": "off",
         "linebreak-style": "off",
-        "react/jsx-filename-extension": "off"
+        "react/jsx-filename-extension": "off",
+        "react/jsx-one-expression-per-line": "off"
     },
     "env": {
         "browser": true

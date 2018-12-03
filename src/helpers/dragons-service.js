@@ -41,9 +41,16 @@ export const MESSAGES = {
     try {
       const req = await fetch(`${apiUrl}/${gameId}/messages`);
       const res = await req.json();
+      if (res.status === 'Game Over') {
+        throw new Error('Game Over')
+      }
       return res;
     } catch (error) {
-      return error;
+      return {
+        gameOver: {
+          message: error.message
+        }
+      };
     }
   },
   async SOLVE(gameId, adId) {
