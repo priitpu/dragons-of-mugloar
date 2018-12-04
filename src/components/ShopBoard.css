@@ -1,12 +1,12 @@
-.AdBoard {
-  background-color: #deb887;
+.ShopBoard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow-y: auto;
+  background-color: #4c4c4c;
   background-size: cover;
   padding: 28px;
   border-style: inset;
   border-width: 7px;
-  overflow-y: scroll;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, max-content));
   grid-gap: 21px;
   border-top-color: #d9ad73;
   border-left-color: #d9ad73;

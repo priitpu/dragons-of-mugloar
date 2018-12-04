@@ -29,8 +29,14 @@ class DragonsOfMugloar extends PureComponent {
   onStartGame = async () => {
     const initialData = await GAME.START();
     const { state } = this;
-    const gameState = Object.assign({}, state.gameState, initialData);
+    const gameState = Object.assign({}, state.gameState, initialData, { gameOver: false });
     this.setState({ gameState });
+  }
+
+  refreshGame = async (gameId, gameState) => {
+    await this.setState({ gameState });
+    await this.listShop(gameId);
+    await this.listAds(gameId);
   }
 
   listAds = async () => {
@@ -63,6 +69,10 @@ class DragonsOfMugloar extends PureComponent {
     const { state } = this;
     const { gameState: { gameId } } = state;
     const res = await MESSAGES.SOLVE(gameId, adId);
+    if (res.success === false && res.lives === 0) {
+      this.onGameOver();
+      return;
+    }
     const gameState = Object.assign({}, state.gameState, {
       lives: res.lives,
       highScore: res.highScore,
@@ -71,14 +81,20 @@ class DragonsOfMugloar extends PureComponent {
       gold: res.gold,
       turn: res.turn
     });
-    this.setState({ gameState });
-    this.listAds(gameId);
+    this.refreshGame(gameId, gameState);
   }
 
   onBuyItem = async (itemId) => {
     const { state } = this;
     const { gameState: { gameId } } = state;
     const res = await SHOP.PURCHASE(gameId, itemId);
+    const gameState = Object.assign({}, state.gameState, {
+      lives: res.lives,
+      gold: res.gold,
+      turn: res.turn,
+      level: res.level
+    });
+    this.refreshGame(gameId, gameState);
   }
 
   onGameOver = () => {
@@ -100,7 +116,7 @@ class DragonsOfMugloar extends PureComponent {
     return (
       <div className="DragonsOfMugloar">
         {
-          gameId
+          gameId && !gameOver
             ? (
               <GameScreen
                 gameState={gameState}
@@ -113,7 +129,7 @@ class DragonsOfMugloar extends PureComponent {
                 onBuyItem={this.onBuyItem}
               />
             )
-            : <StartScreen onStartGame={this.onStartGame} />
+            : <StartScreen onStartGame={this.onStartGame} gameOver={gameOver} />
         }
       </div>
     );

@@ -1,5 +1,5 @@
 .Ad {
-  background-color: #f8f5de;
+  background-color: #deb887;
   box-shadow: inset 0 0 75px rgba(105, 95, 47, 0.3), inset 0 0 20px rgba(206, 186, 100, 0.4), inset 0 0 30px rgba(220,120,0,0.8);
   padding: 28px;
   display: grid;
@@ -52,7 +52,6 @@
 }
 
 .Ad__reward span {
-  content: '';
   display: block;
   height: 15px;
   width: 15px;
@@ -74,17 +73,12 @@
   font-size: 28px;
   border-top: 2px solid wheat;
   border-bottom: 3px solid wheat;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 10px;
+  border-radius: 100%;
   transition: all .2s;
   padding: 7px;
 }
 
 .Ad button:hover {
   cursor: pointer;
-  border-radius: 20px 20px 20px 20px;
-  border-color: goldenrod;
-  color: goldenrod;
+  border-radius: 10px;
 }

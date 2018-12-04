@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ShopItem from './ShopItem';
+import './ShopBoard.css';
 
 class ShopBoard extends PureComponent {
   state = {}

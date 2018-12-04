@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import AdBoard from './AdBoard';
 import Player from './Player';
-import GameOverScreen from './GameOverScreen';
 import ShopBoard from './ShopBoard';
 import './GameScreen.css';
 
@@ -18,28 +17,20 @@ class GameScreen extends PureComponent {
       listShop, shopState,
       onBuyItem
     } = this.props;
-    const { gameOver } = gameState;
     return (
-      <>
-        {!gameOver
-          ? (
-            <div className="GameScreen">
-              <Player gameState={gameState} />
-              <AdBoard
-                listAds={listAds}
-                adsState={adsState}
-                onSolveAd={onSolveAd}
-              />
-              <ShopBoard
-                listShop={listShop}
-                shopState={shopState}
-                onBuyItem={onBuyItem}
-              />
-            </div>
-          )
-          : <GameOverScreen />
-        }
-      </>
+      <div className="GameScreen">
+        <Player gameState={gameState} />
+        <AdBoard
+          listAds={listAds}
+          adsState={adsState}
+          onSolveAd={onSolveAd}
+        />
+        <ShopBoard
+          listShop={listShop}
+          shopState={shopState}
+          onBuyItem={onBuyItem}
+        />
+      </div>
     );
   }
 }

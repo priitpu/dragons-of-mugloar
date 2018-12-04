@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import './ShopItem.css';
 
 class ShopItem extends PureComponent {
   render() {
@@ -10,7 +11,7 @@ class ShopItem extends PureComponent {
     return (
       <div className="ShopItem">
         <h3>{name}</h3>
-        <p>{cost}</p>
+        <p><span />{cost}</p>
         <button
           type="button"
           onClick={() => onBuyItem(id)}
