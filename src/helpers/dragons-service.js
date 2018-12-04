@@ -1,15 +1,17 @@
 const apiUrl = 'https://www.dragonsofmugloar.com/api/v2';
 
+const postPayload = {
+  method: 'POST',
+  cache: 'no-cache',
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
+};
+
 export const GAME = {
   async START() {
     try {
-      const req = await fetch(`${apiUrl}/game/start`, {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        }
-      });
+      const req = await fetch(`${apiUrl}/game/start`, postPayload);
       const res = await req.json();
       return res;
     } catch (error) {
@@ -21,13 +23,7 @@ export const GAME = {
 export const INVESTIGATION = {
   async REPUTATION(gameId) {
     try {
-      const req = await fetch(`${apiUrl}/${gameId}/investigate/reputation`, {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        }
-      });
+      const req = await fetch(`${apiUrl}/${gameId}/investigate/reputation`, postPayload);
       const res = await req.json();
       return res;
     } catch (error) {
@@ -42,7 +38,7 @@ export const MESSAGES = {
       const req = await fetch(`${apiUrl}/${gameId}/messages`);
       const res = await req.json();
       if (res.status === 'Game Over') {
-        throw new Error('Game Over')
+        throw new Error('Game Over');
       }
       return res;
     } catch (error) {
@@ -55,13 +51,7 @@ export const MESSAGES = {
   },
   async SOLVE(gameId, adId) {
     try {
-      const req = await fetch(`${apiUrl}/${gameId}/solve/${adId}`, {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        }
-      });
+      const req = await fetch(`${apiUrl}/${gameId}/solve/${adId}`, postPayload);
       const res = await req.json();
       return res;
     } catch (error) {
@@ -82,13 +72,7 @@ export const SHOP = {
   },
   async PURCHASE(gameId, itemId) {
     try {
-      const req = await fetch(`${apiUrl}/${gameId}/shop/buy/${itemId}`, {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        }
-      });
+      const req = await fetch(`${apiUrl}/${gameId}/shop/buy/${itemId}`, postPayload);
       const res = await req.json();
       return res;
     } catch (error) {

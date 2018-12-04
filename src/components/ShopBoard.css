@@ -1,15 +1,8 @@
 .ShopBoard {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));;
   overflow-y: auto;
   background-color: #4c4c4c;
-  background-size: cover;
   padding: 28px;
-  border-style: inset;
-  border-width: 7px;
   grid-gap: 21px;
-  border-top-color: #d9ad73;
-  border-left-color: #d9ad73;
-  border-right-color: #e4c49b;
-  border-bottom-color: #e4c49b;
 }
