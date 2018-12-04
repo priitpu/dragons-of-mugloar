@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import './Ad.css';
 
 class Ad extends PureComponent {
   render() {
@@ -10,10 +11,10 @@ class Ad extends PureComponent {
     } = this.props;
     return (
       <div className="Ad">
-        <p>{message}</p>
-        <p>{expiresIn}</p>
-        <p>{probability}</p>
-        <p>{reward}</p>
+        <h3>{message}</h3>
+        <p className="Ad__expiration">Expires in {expiresIn} turns</p>
+        <p className="Ad__probability">Difficulty: {probability}</p>
+        <p className="Ad__reward"><span />{reward}</p>
         <button
           type="button"
           onClick={() => onSolveAd(adId)}

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import GameScreen from './components/GameScreen';
 import StartScreen from './components/StartScreen';
-import { GAME, MESSAGES } from './helpers/dragons-service';
+import { GAME, MESSAGES, SHOP } from './helpers/dragons-service';
 import './DragonsOfMugloar.css';
 
 class DragonsOfMugloar extends PureComponent {
@@ -20,6 +20,10 @@ class DragonsOfMugloar extends PureComponent {
       ads: [],
       isLoading: true
     },
+    shopState: {
+      items: [],
+      isLoading: true
+    }
   }
 
   onStartGame = async () => {
@@ -44,6 +48,17 @@ class DragonsOfMugloar extends PureComponent {
     }
   }
 
+  listShop = async () => {
+    const { gameState: { gameId } } = this.state;
+    const items = await SHOP.GETALL(gameId);
+    const { state } = this;
+    const shopState = Object.assign({}, state.shopState, {
+      isLoading: false,
+      items: [...items]
+    });
+    this.setState({ shopState });
+  }
+
   onSolveAd = async (adId) => {
     const { state } = this;
     const { gameState: { gameId } } = state;
@@ -53,10 +68,17 @@ class DragonsOfMugloar extends PureComponent {
       highScore: res.highScore,
       message: res.message,
       score: res.score,
-      turn: 2
+      gold: res.gold,
+      turn: res.turn
     });
     this.setState({ gameState });
     this.listAds(gameId);
+  }
+
+  onBuyItem = async (itemId) => {
+    const { state } = this;
+    const { gameState: { gameId } } = state;
+    const res = await SHOP.PURCHASE(gameId, itemId);
   }
 
   onGameOver = () => {
@@ -68,7 +90,7 @@ class DragonsOfMugloar extends PureComponent {
   }
 
   render() {
-    const { gameState, adsState } = this.state;
+    const { gameState, adsState, shopState } = this.state;
     const {
       gameState: {
         gameId,
@@ -86,6 +108,9 @@ class DragonsOfMugloar extends PureComponent {
                 adsState={adsState}
                 onSolveAd={this.onSolveAd}
                 gameOver={gameOver}
+                listShop={this.listShop}
+                shopState={shopState}
+                onBuyItem={this.onBuyItem}
               />
             )
             : <StartScreen onStartGame={this.onStartGame} />

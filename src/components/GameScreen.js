@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AdBoard from './AdBoard';
 import Player from './Player';
 import GameOverScreen from './GameOverScreen';
+import ShopBoard from './ShopBoard';
 import './GameScreen.css';
 
 class GameScreen extends PureComponent {
@@ -13,7 +14,9 @@ class GameScreen extends PureComponent {
   render() {
     const {
       listAds, adsState,
-      gameState, onSolveAd
+      gameState, onSolveAd,
+      listShop, shopState,
+      onBuyItem
     } = this.props;
     const { gameOver } = gameState;
     return (
@@ -27,6 +30,11 @@ class GameScreen extends PureComponent {
                 adsState={adsState}
                 onSolveAd={onSolveAd}
               />
+              <ShopBoard
+                listShop={listShop}
+                shopState={shopState}
+                onBuyItem={onBuyItem}
+              />
             </div>
           )
           : <GameOverScreen />
@@ -38,9 +46,12 @@ class GameScreen extends PureComponent {
 
 GameScreen.propTypes = {
   listAds: PropTypes.func.isRequired,
+  listShop: PropTypes.func.isRequired,
   onSolveAd: PropTypes.func.isRequired,
+  onBuyItem: PropTypes.func.isRequired,
   adsState: PropTypes.shape().isRequired,
   gameState: PropTypes.shape().isRequired,
+  shopState: PropTypes.shape().isRequired,
 };
 
 export default GameScreen;
