@@ -4,5 +4,6 @@
   background-position: center;
   color: #FFF;
   padding: 105px;
-  font-size: 26px
+  font-size: 26px;
+  grid-area: player;
 }

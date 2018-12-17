@@ -1,13 +1,12 @@
 .AdBoard {
   background-color: #deb887;
   background-image: url('/i/adboard.jpg');
-  background-position: center center;
-  background-size: contain;
+  background-position: left bottom;
+  background-size: cover;
   padding: 28px;
   overflow-y: scroll;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, max-content));
   grid-gap: 21px;
-  transform: rotate3d(0, 1, 0, 5deg);
-  transform-origin: left;
+  grid-area: ads;
 }

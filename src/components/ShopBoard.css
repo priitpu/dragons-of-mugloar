@@ -5,6 +5,5 @@
   background-color: #4c4c4c;
   padding: 28px;
   grid-gap: 21px;
-  transform: rotate3d(0, 1, 0, -5deg);
-  transform-origin: right;
+  grid-area: shop;
 }

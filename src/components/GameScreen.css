@@ -1,10 +1,9 @@
 .GameScreen {
   display: grid;
   width: 100%;
-  grid-template-areas: '. .' '. .';
+  grid-template-areas: 'ads player' 'ads shop';
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 2fr;
-  grid-gap: 52px;
   background: url('/i/bg.jpg');
   background-size: cover;
   background-position: center center;
