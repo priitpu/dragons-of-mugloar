@@ -1,41 +1,29 @@
 .Ad {
-  background-color: #deb887;
-  background-image: url('/i/ad.jpg');
-  background-position: bottom right;
-  background-size: cover;
-  box-shadow: inset 0 0 75px rgba(105, 95, 47, 0.3), inset 0 0 20px rgba(206, 186, 100, 0.4), inset 0 0 30px rgba(220,120,0,0.8), 7px 7px 15px 0px rgba(0,0,0,0.71);
-  padding: 28px;
-  display: grid;
-  grid-template-areas: 'desc desc' '. . ' 'solve .';
-  grid-gap: 7px;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
+}
+
+.Ad__content {
+  display: grid;
+  grid-area: content;
+  grid-template-areas: 'desc desc' '. . ' 'solve .';
+  width: 85%;
+  padding: 35px;
+  justify-self: center;
+  background: #eccca6;
+  height: 100%;
   word-break: break-word;
-}
-
-.Ad::before, .Ad::after {
-  content: '';
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  border-radius: 100%;
-  background: radial-gradient(ellipse at center, rgba(125,126,125,1) 0%,rgba(80,80,80,1) 100%);
-}
-
-.Ad::before {
-  left: 10px;
-  top: 10px;
-}
-
-.Ad::after {
-  right: 10px;
-  bottom: 10px;
+  box-shadow: inset 0px 0px 21px -1px rgba(0,0,0,0.75), 0px 10px 21px -1px rgba(0,0,0,0.75);
+  grid-gap: 21px;
 }
 
 .Ad h3{
-  font-size: 28px;
+  font-size: 32px;
   grid-area: desc;
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 .Ad__expiration, .Ad__probability {
@@ -54,6 +42,11 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  background-color: #ca4848;
+  border-radius: 100%;
+  width: 110px;
+  height: 110px;
+  justify-self: center;
 }
 
 .Ad__reward span {
@@ -98,4 +91,54 @@
 
 .Ad button:hover::before {
   opacity: 1;
+}
+
+.Ad__roll {
+  position: absolute;
+  height: 30px;
+  width: 100px;
+  background-color: #eccca6;
+  border-top: 3px solid #8c7a64;
+  border-bottom: 10px solid #968169;
+  border-radius:10px;
+}
+
+.Ad__roll::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 4px;
+  height: 20px;
+  width: 30px;
+  background-color: #6a3b21;
+  box-shadow: inset 0px 0px 21px -1px rgba(0,0,0,0.75), 0px 10px 21px -1px rgba(0,0,0,0.75);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.Ad__roll::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  top: 4px;
+  height: 20px;
+  width: 30px;
+  background-color: #6a3b21;
+  box-shadow: inset 0px 0px 21px -1px rgba(0,0,0,0.75), 0px 10px 21px -1px rgba(0,0,0,0.75);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Ad__roll--top {
+  top: -25px;
+  width: 90%;
+  grid-area: top;
+  box-shadow: inset 0px 0px 21px -1px rgba(0,0,0,0.75), 0px 10px 21px -1px rgba(0,0,0,0.75);
+}
+
+.Ad__roll--bottom {
+  bottom: -25px;
+  width: 90%;
+  grid-area: bottom;
+  box-shadow: inset 0px 0px 21px -1px rgba(0,0,0,0.75), 0px 10px 21px -1px rgba(0,0,0,0.75);
 }
