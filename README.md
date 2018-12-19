@@ -7,3 +7,7 @@ Simple app in use with https://www.dragonsofmugloar.com/doc/ API
 * Allows user to pick which ones to solve
 * Allows user to purchase items from the shop
 * Displays player's score, gold and lives
+
+# Live demo
+
+https://dragons-of-mugloar.herokuapp.com/
