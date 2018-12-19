@@ -11,13 +11,17 @@ class ShopItem extends PureComponent {
     return (
       <div className="ShopItem">
         <h3>{name}</h3>
-        <p><span />{cost}</p>
-        <button
-          type="button"
-          onClick={() => onBuyItem(id)}
-        >
-          BUY
-        </button>
+        <div className="ShopItem__buy">
+          <div className="ShopItem__price">
+            <span />{cost}
+          </div>
+          <button
+            type="button"
+            onClick={() => onBuyItem(id)}
+          >
+            BUY
+          </button>
+        </div>
       </div>
     );
   }

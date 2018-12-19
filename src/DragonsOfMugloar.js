@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import GameScreen from './components/GameScreen';
 import StartScreen from './components/StartScreen';
-import { GAME, MESSAGES, SHOP } from './helpers/dragons-service';
+import { GAME, MESSAGES, SHOP, INVESTIGATION } from './helpers/dragons-service';
 import './DragonsOfMugloar.css';
 
 class DragonsOfMugloar extends PureComponent {
@@ -23,6 +23,11 @@ class DragonsOfMugloar extends PureComponent {
     shopState: {
       items: [],
       isLoading: true
+    },
+    reputation: {
+      state: 0,
+      people: 0,
+      underworld: 0
     }
   }
 
@@ -81,6 +86,13 @@ class DragonsOfMugloar extends PureComponent {
       gold: res.gold,
       turn: res.turn
     });
+    const investigation = await INVESTIGATION.REPUTATION(gameId);
+    const reputation = Object.assign({}, state.reputation, {
+      people: investigation.people,
+      state: investigation.state,
+      underworld: investigation.underworld
+    });
+    this.setState({ reputation });
     this.refreshGame(gameId, gameState);
   }
 
@@ -106,12 +118,15 @@ class DragonsOfMugloar extends PureComponent {
   }
 
   render() {
-    const { gameState, adsState, shopState } = this.state;
     const {
       gameState: {
         gameId,
         gameOver
-      }
+      },
+      gameState,
+      adsState,
+      shopState,
+      reputation
     } = this.state;
     return (
       <div className="DragonsOfMugloar">
@@ -127,6 +142,7 @@ class DragonsOfMugloar extends PureComponent {
                 listShop={this.listShop}
                 shopState={shopState}
                 onBuyItem={this.onBuyItem}
+                reputation={reputation}
               />
             )
             : <StartScreen onStartGame={this.onStartGame} gameOver={gameOver} />
