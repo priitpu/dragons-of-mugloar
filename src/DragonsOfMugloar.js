@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
-import GameScreen from './components/GameScreen';
-import StartScreen from './components/StartScreen';
-import { GAME, MESSAGES, SHOP, INVESTIGATION } from './helpers/dragons-service';
+import GameScreen from './components/GameScreen/GameScreen';
+import StartScreen from './components/StartScreen/StartScreen';
+import {
+  GAME, MESSAGES, SHOP, INVESTIGATION
+} from './helpers/dragons-service';
 import './DragonsOfMugloar.css';
 
 class DragonsOfMugloar extends PureComponent {
@@ -13,6 +15,7 @@ class DragonsOfMugloar extends PureComponent {
       level: 0,
       score: 0,
       highScore: 0,
+      message: '',
       turn: 0,
       gameOver: false
     },
@@ -28,7 +31,7 @@ class DragonsOfMugloar extends PureComponent {
       state: 0,
       people: 0,
       underworld: 0
-    }
+    },
   }
 
   onStartGame = async () => {
@@ -75,17 +78,23 @@ class DragonsOfMugloar extends PureComponent {
     const { gameState: { gameId } } = state;
     const res = await MESSAGES.SOLVE(gameId, adId);
     if (res.success === false && res.lives === 0) {
-      this.onGameOver();
+      this.onGameOver(res);
       return;
     }
     const gameState = Object.assign({}, state.gameState, {
       lives: res.lives,
       highScore: res.highScore,
-      message: res.message,
       score: res.score,
       gold: res.gold,
-      turn: res.turn
+      turn: res.turn,
+      message: res.message
     });
+    this.refreshGame(gameId, gameState);
+  }
+
+  onInvestigate = async (gameId) => {
+    const { state } = this;
+    const { gameState } = state;
     const investigation = await INVESTIGATION.REPUTATION(gameId);
     const reputation = Object.assign({}, state.reputation, {
       people: investigation.people,
@@ -109,9 +118,9 @@ class DragonsOfMugloar extends PureComponent {
     this.refreshGame(gameId, gameState);
   }
 
-  onGameOver = () => {
+  onGameOver = (res) => {
     const { state } = this;
-    const gameState = Object.assign({}, state.gameState, {
+    const gameState = Object.assign({}, state.gameState, res, {
       gameOver: true
     });
     this.setState({ gameState });
@@ -126,7 +135,7 @@ class DragonsOfMugloar extends PureComponent {
       gameState,
       adsState,
       shopState,
-      reputation
+      reputation,
     } = this.state;
     return (
       <div className="DragonsOfMugloar">
@@ -143,6 +152,7 @@ class DragonsOfMugloar extends PureComponent {
                 shopState={shopState}
                 onBuyItem={this.onBuyItem}
                 reputation={reputation}
+                onInvestigate={this.onInvestigate}
               />
             )
             : <StartScreen onStartGame={this.onStartGame} gameOver={gameOver} />
