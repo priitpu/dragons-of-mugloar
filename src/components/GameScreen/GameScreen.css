@@ -1,0 +1,7 @@
+.GameScreen {
+  display: grid;
+  width: 100%;
+  grid-template-areas: 'ads player' 'ads shop';
+  grid-template-columns: minmax(400px, 1fr) minmax(200px, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}

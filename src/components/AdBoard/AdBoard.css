@@ -1,0 +1,11 @@
+.AdBoard {
+  background-color: #fff;
+  background: url('/i/AdBoard.jpg');
+  background-size: 450px;
+  padding: 40px 15px;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 70px;
+  grid-area: ads;
+}
