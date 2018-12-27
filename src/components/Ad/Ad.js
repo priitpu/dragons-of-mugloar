@@ -25,7 +25,7 @@ class Ad extends Component {
         exit={rolledUp === true}
         timeout={{
           enter: 100,
-          exit: 500
+          exit: 600
         }}
         appear
         onExited={() => onSolveAd(adId)}

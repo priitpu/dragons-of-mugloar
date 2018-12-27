@@ -17,7 +17,7 @@ class ShopItem extends PureComponent {
           </div>
           <button
             type="button"
-            onClick={() => onBuyItem(id)}
+            onClick={() => onBuyItem(id, name)}
           >
             BUY
           </button>

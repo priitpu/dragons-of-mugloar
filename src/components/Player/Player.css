@@ -1,7 +1,5 @@
 .Player {
-  grid-column: 1/3;
-  background-color: #fff;
-  color: #000;
+  color: #fff;
   font-size: 32px;
   font-weight: bold;
   grid-area: player;
@@ -10,5 +8,23 @@
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 7px;
+  padding: 14px;
+}
+
+.Player:before {
+  content: '';
+  height: 300%;
+  width: 100%;
+  position: absolute;
+  background-image: url('/i/ShopBoard.jpg');
+  background-position: center center;
+  background-size: 70px;
+  z-index: -1;
+  transform: rotate(90deg) scale(1.7);
+  filter: brightness(0.9) hue-rotate(-10deg);
 }

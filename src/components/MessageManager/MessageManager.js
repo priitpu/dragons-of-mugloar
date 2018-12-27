@@ -9,8 +9,12 @@ const MessageManager = ({ message }) => (
   </div>
 );
 
+MessageManager.defaultProps = {
+  message: ''
+};
+
 MessageManager.propTypes = {
-  message: PropTypes.string.isRequired
+  message: PropTypes.string
 };
 
 export default MessageManager;

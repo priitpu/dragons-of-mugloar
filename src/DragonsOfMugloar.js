@@ -94,18 +94,21 @@ class DragonsOfMugloar extends PureComponent {
 
   onInvestigate = async (gameId) => {
     const { state } = this;
-    const { gameState } = state;
     const investigation = await INVESTIGATION.REPUTATION(gameId);
     const reputation = Object.assign({}, state.reputation, {
       people: investigation.people,
       state: investigation.state,
       underworld: investigation.underworld
     });
+    const gameState = Object.assign({}, state.gameState, {
+      turn: state.gameState.turn + 1,
+      message: 'You investigated your reputation'
+    });
     this.setState({ reputation });
     this.refreshGame(gameId, gameState);
   }
 
-  onBuyItem = async (itemId) => {
+  onBuyItem = async (itemId, itemName) => {
     const { state } = this;
     const { gameState: { gameId } } = state;
     const res = await SHOP.PURCHASE(gameId, itemId);
@@ -113,7 +116,8 @@ class DragonsOfMugloar extends PureComponent {
       lives: res.lives,
       gold: res.gold,
       turn: res.turn,
-      level: res.level
+      level: res.level,
+      message: res.shoppingSuccess ? `Bought ${itemName}` : null
     });
     this.refreshGame(gameId, gameState);
   }

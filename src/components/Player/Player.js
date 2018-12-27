@@ -13,7 +13,6 @@ const Player = ({ gameState, reputation, onInvestigate }) => {
   return (
     <div className="Player">
       <div className="Player__stats">
-        <h3>Stats</h3>
         <p>Lives: {lives}</p>
         <p>Score: {score}</p>
         <p>Gold: {gold}</p>
@@ -36,7 +35,7 @@ const Player = ({ gameState, reputation, onInvestigate }) => {
 Player.propTypes = {
   gameState: PropTypes.shape().isRequired,
   reputation: PropTypes.shape().isRequired,
-  onInvestigate: PropTypes.func.isRequired
+  onInvestigate: PropTypes.func.isRequired,
 };
 
 export default Player;
